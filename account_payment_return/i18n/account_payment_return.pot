@@ -112,6 +112,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__create_date
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__create_date
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__create_date
+
 msgid "Created on"
 msgstr ""
 
@@ -551,4 +552,3 @@ msgstr ""
 #, python-format
 msgid "assign to invoice"
 msgstr ""
-

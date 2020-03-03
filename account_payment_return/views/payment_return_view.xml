@@ -108,7 +108,7 @@
     </record>
 
     <record model="ir.actions.act_window" id="payment_return_action">
-        <field name="name">Customer Payment Returns</field>
+        <field name="name">Payment Returns</field>
         <field name="res_model">payment.return</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
@@ -116,7 +116,7 @@
 
     <menuitem id="payment_return_menu"
               name="Customer Payment Returns"
-              parent="account.menu_finance_receivables"
+              parent="account_payment_order.payment_root"
               action="payment_return_action"
-              sequence="20"/>
+              sequence="70"/>
 </odoo>

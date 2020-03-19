@@ -1,10 +1,14 @@
-#. Go to Invoicing > Sales > Customer Payment Returns, and create a new
-   record, register on each line a paid (reconciled) receivable journal item,
+#. Go to Invoicing > Payments > Payment Returns, and create a new
+   record, register on each line a paid (reconciled) receivable/payable journal item,
    and input the amount that is going to be returned.
 
    Another option to fill info is setting references and click match button to
    find matches with invoices, move lines or moves. This functionality is extended
    by other modules as *account_payment_return_import_sepa_pain*
+
+   When using the return from a payment/debit order, if the payment mode generate offsetting moves with a transfert account, a transfert return journal has to be created.
+
+
 
 #. It's possible to add bank charges amount on each line.
 

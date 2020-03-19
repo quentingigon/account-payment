@@ -6,3 +6,4 @@
 * Carlos Dauden <carlos.dauden@tecnativa.com>
 * David Vidal <david.vidal@tecnativa.com>
 * Luis M. Ontalba <luis.martinez@tecnativa.com>
+* Benoît Schopfer <bschopfer@compassion.ch>

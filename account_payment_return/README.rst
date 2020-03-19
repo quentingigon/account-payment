@@ -13,19 +13,13 @@ Account Payment Returns
 .. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
-.. |badge3| image:: https://img.shields.io/badge/github-OCA%2Faccount--payment-lightgray.png?logo=github
-    :target: https://github.com/OCA/account-payment/tree/12.0/account_payment_return
-    :alt: OCA/account-payment
-.. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/account-payment-12-0/account-payment-12-0-account_payment_return
-    :alt: Translate me on Weblate
-.. |badge5| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
-    :target: https://runbot.odoo-community.org/runbot/96/12.0
-    :alt: Try me on Runbot
+.. |badge3| image:: https://img.shields.io/badge/github-compassionCH%2Faccount--payment-lightgray.png?logo=github
+    :target: https://github.com/compassionCH/account-payment/tree/12.0/account_payment_return
+    :alt: compassionCH/account-payment
 
-|badge1| |badge2| |badge3| |badge4| |badge5|
+|badge1| |badge2| |badge3| 
 
-This module implements customer receivables returns and allows to send
+This module implements customer receivables returns and vendor payable returns allows to send
 related reconciled account move lines back to a state where the debt is still
 open, and letting history of it.
 
@@ -40,13 +34,17 @@ full returned payment record.
 Usage
 =====
 
-#. Go to Invoicing > Sales > Customer Payment Returns, and create a new
-   record, register on each line a paid (reconciled) receivable journal item,
+#. Go to Invoicing > Payments > Payment Returns, and create a new
+   record, register on each line a paid (reconciled) receivable/payable journal item,
    and input the amount that is going to be returned.
 
    Another option to fill info is setting references and click match button to
    find matches with invoices, move lines or moves. This functionality is extended
    by other modules as *account_payment_return_import_sepa_pain*
+
+   When using the return from a payment/debit order, if the payment mode generate offsetting moves with a transfert account, a transfert return journal has to be created.
+
+
 
 #. It's possible to add bank charges amount on each line.
 
@@ -60,10 +58,10 @@ Usage
 Bug Tracker
 ===========
 
-Bugs are tracked on `GitHub Issues <https://github.com/OCA/account-payment/issues>`_.
+Bugs are tracked on `GitHub Issues <https://github.com/compassionCH/account-payment/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us smashing it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/account-payment/issues/new?body=module:%20account_payment_return%0Aversion:%2012.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/compassionCH/account-payment/issues/new?body=module:%20account_payment_return%0Aversion:%2012.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -75,8 +73,9 @@ Authors
 
 * 7 i TRIA
 * Tecnativa
+* Compassion CH
 * initOS GmbH & Co.
-*
+* 
 
 Contributors
 ~~~~~~~~~~~~
@@ -89,20 +88,20 @@ Contributors
 * Carlos Dauden <carlos.dauden@tecnativa.com>
 * David Vidal <david.vidal@tecnativa.com>
 * Luis M. Ontalba <luis.martinez@tecnativa.com>
+* Benoît Schopfer <bschopfer@compassion.ch>
 
 Maintainers
 ~~~~~~~~~~~
 
-This module is maintained by the OCA.
+This module is maintained by Compassion Switzerland.
 
-.. image:: https://odoo-community.org/logo.png
-   :alt: Odoo Community Association
-   :target: https://odoo-community.org
+.. image:: https://upload.wikimedia.org/wikipedia/en/8/83/CompassionInternationalLogo.png
+   :alt: Compassion Switzerland
+   :target: https://www.compassion.ch
 
-OCA, or the Odoo Community Association, is a nonprofit organization whose
-mission is to support the collaborative development of Odoo features and
-promote its widespread use.
+Compassion Switzerland is a nonprofit organization whose
+mission is to release children from extreme poverty in Jesus name.
 
-This module is part of the `OCA/account-payment <https://github.com/OCA/account-payment/tree/12.0/account_payment_return>`_ project on GitHub.
+This module is part of the `compassionCH/account-payment <https://github.com/compassionCH/account-payment/tree/12.0/account_payment_return>`_ project on GitHub.
 
-You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
+You are welcome to contribute.

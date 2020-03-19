@@ -212,7 +212,6 @@ class PaymentReturn(models.Model):
             raise UserError(
                 _("You must input all moves references in the payment "
                   "return."))
-        invoices = self.env['account.invoice']
         move_line_model = self.env['account.move.line']
         move = self.env['account.move'].create(
             self._prepare_return_move_vals())
@@ -240,32 +239,17 @@ class PaymentReturn(models.Model):
             move_line2 = move_line_model.with_context(
                 check_move_validity=False).create(move_line2_vals)
             total_amount += move_line2.debit
-
-            if payment_order.payment_type == 'outbound':
-                for move_line in return_line.move_line_ids:
-                    returned_moves = move_line.matched_credit_ids.mapped(
-                        'credit_move_id')
-                    invoices |= returned_moves.mapped('invoice_id')
-                    move_line.remove_move_reconcile()
-                    (move_line | move_line2).reconcile()
-                    return_line.move_line_ids.mapped(
-                        'matched_credit_ids').write(
-                        {
-                            'origin_returned_move_ids': [
-                                (6, 0, returned_moves.ids)]})
-            else:
-                for move_line in return_line.move_line_ids:
-                    returned_moves = move_line.matched_debit_ids.mapped(
-                        'debit_move_id')
-                    invoices |= returned_moves.mapped('invoice_id')
-                    move_line.remove_move_reconcile()
-                    (move_line | move_line2).reconcile()
-                    return_line.move_line_ids.mapped(
-                        'matched_debit_ids').write(
-                        {
-                            'origin_returned_move_ids': [
-                                (6, 0, returned_moves.ids)]})
-
+            for move_line in return_line.move_line_ids:
+                # move_line: credit on customer account (from payment move)
+                # returned_moves: debit on customer account (from invoice move)
+                returned_moves = move_line.matched_debit_ids.mapped(
+                    'debit_move_id')
+                returned_moves._payment_returned(return_line)
+                all_move_lines |= move_line
+                move_line.remove_move_reconcile()
+                (move_line | move_line2).reconcile()
+                return_line.move_line_ids.mapped('matched_debit_ids').write(
+                    {'origin_returned_move_ids': [(6, 0, returned_moves.ids)]})
             if return_line.expense_amount:
                 expense_lines_vals = return_line._prepare_expense_lines_vals(
                     move)
@@ -286,8 +270,6 @@ class PaymentReturn(models.Model):
         # Reconcile (if option enabled)
         self._auto_reconcile(
             credit_move_line, all_move_lines, total_amount)
-        # Write directly because we returned payments just now
-        invoices.write(self._prepare_invoice_returned_vals())
         move.post()
         self.write({'state': 'done', 'move_id': move.id})
         return True
@@ -475,6 +457,9 @@ class PaymentReturnLine(models.Model):
         lines2match.match_move()
         self._get_partner_from_move()
         self.filtered(lambda x: not x.amount)._compute_amount()
+
+    def _prepare_invoice_returned_vals(self):
+        return self.return_id._prepare_invoice_returned_vals()
 
     @api.multi
     def _prepare_return_move_line_vals(self, move, debit, credit):
